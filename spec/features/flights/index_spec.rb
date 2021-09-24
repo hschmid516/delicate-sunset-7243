@@ -32,15 +32,19 @@ RSpec.describe 'flights index page' do
         click_link('Remove Passenger')
       end
       expect(current_path).to eq(flights_path)
-      expect(page).to_not have_content(@pass1.id)
+      expect(page).to_not have_content(@pass1.name)
     end
+
+    expect(Passenger.find(@pass1.id)).to eq(@pass1)
 
     within("#flight-#{@flight2.id}") do
       within("#passenger-#{@pass3.id}") do
         click_link('Remove Passenger')
       end
       expect(current_path).to eq(flights_path)
-      expect(page).to_not have_content(@pass3.id)
+      expect(page).to_not have_content(@pass3.name)
     end
+
+    expect(Passenger.find(@pass3.id)).to eq(@pass3)
   end
 end

@@ -6,7 +6,9 @@
   <li><b><%= passenger.name %></b></li>
   <ul>
     <li>Age: <%= passenger.age %></li>
-    <li>Flight Count: <%= passenger.flight_count %></li>
+    <div id="flight_count-<%= passenger.id %>">
+      <li>Flight Count: <%= passenger.flight_count %></li>
+    </div>
   </ul>
   <% end %>
 </ul>

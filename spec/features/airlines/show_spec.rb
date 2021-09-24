@@ -17,8 +17,10 @@ RSpec.describe 'airline show page' do
 
     @airline2 = Airline.create!(name: 'Southwest')
     @flight4 = @airline2.flights.create!(number: '111', date: '01/01/20', departure_city: 'Honolulu', arrival_city: 'Tokyo')
+    @flight5 = @airline2.flights.create!(number: '2', date: '04/01/20', departure_city: 'Honolulu', arrival_city: 'Tokyo')
     @pass6 = @flight4.passengers.create(name: 'Tammy', age: 32)
     Trip.create!(flight: @flight4, passenger: @pass1)
+    Trip.create!(flight: @flight5, passenger: @pass4)
     visit airline_path(@airline1)
   end
 
@@ -33,5 +35,16 @@ RSpec.describe 'airline show page' do
   it 'shows passengers sorted by number of flights on airline' do
     expect(@pass4.name).to appear_before(@pass1.name)
     expect(@pass1.name).to appear_before(@pass3.name)
+    within("#flight_count-#{@pass4.id}") do
+      expect(page).to have_content(3)
+    end
+
+    within("#flight_count-#{@pass1.id}") do
+      expect(page).to have_content(2)
+    end
+
+    within("#flight_count-#{@pass3.id}") do
+      expect(page).to have_content(1)
+    end
   end
 end
