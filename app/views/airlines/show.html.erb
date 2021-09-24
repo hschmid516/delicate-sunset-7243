@@ -2,7 +2,11 @@
 
 <h4>Passengers:</h4>
 <ul>
-  <% @airline.adult_passengers.each do |passenger| %>
-  <li>Name: <%= passenger.name %>, Age: <%= passenger.age %></li>
+  <% @airline.sorted_adult_passengers.each do |passenger| %>
+  <li><b><%= passenger.name %></b></li>
+  <ul>
+    <li>Age: <%= passenger.age %></li>
+    <li>Flight Count: <%= passenger.flight_count %></li>
+  </ul>
   <% end %>
 </ul>
