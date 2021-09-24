@@ -4,10 +4,12 @@
   <div id="flight-<%= flight.id %>">
     <ul>
       <li><%= flight.airline.name %> Flight: <%= flight.number %></li>
-      <li><%= flight.passengers.each do |passenger| %> </li>
+      <li>Passengers:<% flight.trips.each do |trip| %> </li>
+      <div id="passenger-<%= trip.passenger_id %>">
         <ul>
-          <li><%= passenger.name %></li>
+          <li><%= trip.passenger.name %> <%= link_to 'Remove Passenger', trip_path(trip), method: :delete %></li>
         </ul>
+      </div>
       <% end %>
     </ul>
   </div>

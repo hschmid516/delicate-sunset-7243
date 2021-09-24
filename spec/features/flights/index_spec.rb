@@ -25,4 +25,14 @@ RSpec.describe 'flights index page' do
       expect(page).to have_content(@pass3.name)
     end
   end
+
+  it 'can remove passenger from flight' do
+    within("#flight-#{@flight1.id}") do
+      within("#passenger-#{@pass1.id}") do
+        click_link('Remove Passenger')
+      end
+      expect(current_path).to eq(flights_path)
+      expect(page).to_not have_content(@pass1.id)
+    end
+  end
 end
